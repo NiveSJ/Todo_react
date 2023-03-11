@@ -1,117 +1,134 @@
 import { useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
+import './Content.css';
+import { Form } from "react-bootstrap";
 
-import Form from 'react-bootstrap/Form';
-import './Content.css'
+
 
 
 const TableHeader = () => {
-  return (
-  <thead>
-      <tr>
-       
-          <th>todo</th>
-          <th>Action</th>
-      </tr>
-  </thead>
-  );
+    return (
+    <thead>
+  <tr>
+  
+    <th>Todo </th>
+    <th>Assignee</th>
+    <th>Deadline</th>
+   <th>Status</th>
+  </tr>
+  
+    </thead>
+    );
+  }
+  
+   
+  const TableAction = () => {
+    return (
+    <>
+        <button type='button' className='btn btn-danger' >Delete</button>
+        <button type='button' className='btn btn-warning'>Edit</button>
+    </>
+    );
+  }
+
+
+
+export let Displaytodo=(props)=>{
+
+return(
+    <Container >
+<h1>Created Task List</h1>
+
+<table>
+<TableHeader/>
+
+<tbody>
+
+  {props.inputList.map(item=>{
+   return(
+<tr>
+<td>{item.todo}</td>
+<td>{item.assignee}</td>
+<td>{item.deadline}</td>
+<td>{item.status}</td>
+<td>  <TableAction/>  </td>
+
+</tr>);})}
+
+ </tbody>
+
+</table>
+
+</Container > );
+
+
 }
-const TableAction = () => {
-  return (
-  <>
-      <button type='button' className='btn btn-danger' >Delete</button>
-      <button type='button' className='btn btn-warning'>Edit</button>
-  </>
-  );
-}
 
 
 
 
-let Content =()=>{
 
-  const [todo,SetTodo]=useState("");
+
+
+export let Content =()=>{
+
+  const [inputtodo,SetTodo]=useState({todo:"",assignee:"",deadline:"",status:"pending"});
   const [inputList,SetInputList]=useState([]);
+
+// On submit todo value will be copied to the array(inputList)
+
   
   let saveTodo= (e)=>{
     e.preventDefault();
 
-    const inval=todo;
-    if(todo){
-    SetInputList((ls)=>[...ls,inval])
-    console.log(todo);
-    SetTodo("")
+    const inputvalue=inputtodo;
+    //console.log(inputvalue);
+
+
+    if(inputvalue.todo){
+    // Sets input value to array    ref   : https://beta.reactjs.org/learn/updating-objects-in-state
+    SetInputList([
+      ...inputList, inputvalue
+    ]);
+
+   
+    SetTodo({todo:"",status:"pending"});  // To clear the field after input
   }
     else
     alert("Todo cannot be empty")
 
-    console.log(todo);
+    console.log(inputvalue);
   }
 
   return(
-    <div>
+    <Container >
 
-      <h1> Task Manager App</h1>
-      <div className="mb-3">
+      <h1 className="header"> Task Manager App</h1>
+      <Container >
      
-      <form className="row g-3" onSubmit={saveTodo}>
+      <form  onSubmit={saveTodo}>
 
-         <div className="col-auto">
+         <Container className="p-3">
+          <h3> Create your todo here</h3>
       
-         <input type="text" placeholder="Enter todo"  name="todo" value={todo} onChange={(e)=>SetTodo(e.target.value)}/>
-         </div>
-        <div className="col-auto">
-       <button type="submit" className="btn btn-primary mb-3">Add todo</button>
-        </div>
+         <input type="text" placeholder="Enter todo"  name="inputtodo.todo" value={inputtodo.todo} onChange={(e)=>SetTodo({...inputtodo,todo:e.target.value})}/>
+        
+         <input type="text" placeholder="Enter Assignee"  name="inputtodo.assignee" value={inputtodo.assignee} onChange={(e)=>SetTodo({...inputtodo,assignee:e.target.value})}/>
+       
+
+         <input type="text" placeholder="YYYY-MM-DD"  name="inputtodo.deadline" value={inputtodo.deadline} onChange={(e)=>SetTodo({...inputtodo,deadline:e.target.value})}/>
+         
+       
+         </Container >
+       
+      
+
+       <Button tyep="submit "variant="primary">Save</Button>{' '}
+       
      </form>
        
       <br></br>
-
-      
-
-
-       
-
-
-<div className="test">
-<table className='table table-dark table-striped'>
-    <TableHeader />
-
-{
-
-       inputList.map(tolist =>   <div> 
-
-<tbody>
-        <tr>
-            
-            <td>{tolist.todo}</td>
-            <td><TableAction /></td>
-        </tr>
-       
-    </tbody>
-
-     
-       
-
-
-
-
-
-       </div>      )
-       
-       
-       
-}
-</table>
-       
-     
-
-    </div>
-
-
-    </div>
-
-    </div>
+ </Container > </Container >
 
   );
 
@@ -124,4 +141,4 @@ let Content =()=>{
 
 }
 
-export default Content;
+//export default Content,Displaytodo;

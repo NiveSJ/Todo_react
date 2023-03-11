@@ -1,6 +1,8 @@
 
 import './App.css';
-import Content from './components/Content.js';
+import {Content,Displaytodo} from './components/Content.js';
+
+import Adduser from './components/user/adduser';
 
 
 function App() {
@@ -10,6 +12,10 @@ function App() {
         <div>
           
        <Content/>
+       <Adduser/>
+     
+      
+       
         </div>
        
       </header>
