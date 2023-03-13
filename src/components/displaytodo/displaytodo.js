@@ -21,6 +21,7 @@ const TableHeader = () => {
     <>
         <button type='button' className='btn btn-danger' >Delete</button>
         <button type='button' className='btn btn-warning'>Edit</button>
+        <button type='button' className='btn btn-warning'>Save</button>
     </>
     );
   }

@@ -1,6 +1,7 @@
 
 import './App.css';
-import {Content,Displaytodo} from './components/Content.js';
+import {Content} from './components/Content.js';
+import Displaytodo from './components/displaytodo/displaytodo';
 
 import Adduser from './components/user/adduser';
 
@@ -13,6 +14,9 @@ function App() {
           
        <Content/>
        <Adduser/>
+       <Displaytodo list={}/>
+       
+
      
       
        
