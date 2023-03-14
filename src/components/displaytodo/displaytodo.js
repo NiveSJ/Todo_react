@@ -1,62 +1,67 @@
 import { Container } from "react-bootstrap";
 
-const TableHeader = () => {
+
+const Displaytodo = (props) => {
+
+
+  const TableHeader = () => {
     return (
-    <thead>
-  <tr>
-  
-    <th>Todo </th>
-    <th>Assignee</th>
-    <th>Deadline</th>
-   <th>Status</th>
-  </tr>
-  
-    </thead>
+      <>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Todo </th>
+            <th>deadline </th>
+            <th>assignee </th>
+            <th>status </th>
+
+            
+          </tr>
+        </thead>
+      </>
     );
-  }
+  };
   
-   
   const TableAction = () => {
+
+    
     return (
-    <>
-        <button type='button' className='btn btn-danger' >Delete</button>
-        <button type='button' className='btn btn-warning'>Edit</button>
-        <button type='button' className='btn btn-warning'>Save</button>
-    </>
+      <>
+        <button type="button" className="btn btn-danger">
+          Delete
+        </button>
+        <button type="button" className="btn btn-warning">
+          Edit
+        </button>
+        <button type="button" className="btn btn-warning">
+          Save
+        </button>
+      </>
     );
-  }
+  };
 
 
+  return (
+    <Container>
+      <table>
+        <TableHeader />
 
-let Displaytodo=(props)=>{
-
-return(
-    <Container >
-<h1>Created Task List</h1>
-
-<table>
-<TableHeader/>
-
-<tbody>
-
-  {props.map(item=>{
-   return(
-<tr>
-<td>{item.todo}</td>
-<td>{item.assignee}</td>
-<td>{item.deadline}</td>
-<td>{item.status}</td>
-<td>  <TableAction/>  </td>
-
-</tr>);})}
-
- </tbody>
-
-</table>
-
-</Container > );
-
-
-}
+        <tbody>
+          {props.list.map((item) => {
+            return (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.todo}</td>
+                <td> {item.deadline}</td>
+                <td> {item.assignee.fullname}</td>
+                <td> {item.status}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </Container>
+  );
+};
 
 export default Displaytodo;
